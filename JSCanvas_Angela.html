@@ -38,6 +38,7 @@
 	var y = 0;
 	var color = "red";
 	var radius = 5;
+	var minPenSize = 1;
 // 	draw(); 
 	
 	function draw(){ 
@@ -47,6 +48,8 @@
 		ctx.fill();
 	}
 
+// desktop compatbility 
+	
 	window.addEventListener('mousemove', function (e) {
 		x=e.pageX;
 		// console.log(e.pageX);
@@ -54,6 +57,8 @@
 		// console.log(e.pageY);
 		draw();
 	})
+
+// mobile compatibility
 	
 	window.addEventListener('touchmove', function (e) {
 		x=e.pageX;
@@ -62,6 +67,9 @@
 		// console.log(e.pageY);
 		draw();
 	})
+
+// using keys to change the color of the pen and resizing the pen tool with the up and down arrow keys
+// Used this site --- https://keycode.info/ to obtain key codes --- for the color changes
 	
 	window.addEventListener('keyup', function(e) {
 		// console.log(e.keyCode);
@@ -86,12 +94,13 @@
 			radius += 5;
 		}
 		else if (e.keyCode == '40') {
+			if (radius > minPenSize);
 			radius -= 5;
 		}
 		draw();
 	})
-		
-// 	Used this site --- https://keycode.info/ to obtain key codes --- for the color changes
+	
+// the space bar to clear and clean the canvas
 	
 	window.addEventListener('keydown', function(e) {
   		if (e.keyCode == '32') {
@@ -100,12 +109,16 @@
   		draw();
 	})
 
+// resizing the browser to maintain and 80% size
+	
 	window.addEventListener('resize' , canvasSize);
 	function canvasSize(e){
   		c.width = window.innerWidth*0.7;
   		c.height = window.innerHeight*0.7;
 	}
 
+// color picker tool to change on the canvas when selected
+	
 	colorpick.addEventListener("change", checkColor);
 	function checkColor(e) {
   		color = event.target.value;
